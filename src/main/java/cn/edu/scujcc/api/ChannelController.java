@@ -52,7 +52,7 @@ public class ChannelController {
 		if(c != null) {
 			return c;
 		}else {
-			Logger.error("找不到指定的频道。");
+			Logger.error("找不到指定的频道...");
 			return null;
 		}
 	 }
