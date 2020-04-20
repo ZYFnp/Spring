@@ -48,7 +48,6 @@ public class ChannelController {
 	 */
 	@GetMapping("/{id}")
 	 public Channel getChannel(@PathVariable int id) {
-		Logger.info("正在读取"+id+"的频道信息...");
 		Channel c = service.getChannel(id);
 		if(c != null) {
 			return c;
