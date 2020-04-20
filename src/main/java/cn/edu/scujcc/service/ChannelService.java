@@ -10,7 +10,7 @@ import cn.edu.scujcc.dao.ChannelRepository;
 import cn.edu.scujcc.model.Channel;
 
 /**
- * Ìá¹©ÆµµÀÏà¹ØÒµÎñÂß¼­
+ * æä¾›é¢‘é“ç›¸å…³ä¸šåŠ¡é€»è¾‘
  * @author ZYF
  *
  */
@@ -25,15 +25,15 @@ public class ChannelService {
 		for (int i=0; i< 10; i++) {
 			Channel c = new Channel();
 			c.setId(i + 1);
-			c.setTitle("½õ³ÇµçÊÓ"+(i+1)+"Ì¨");
-			c.setQuality("1080P¸ßÇå");
+			c.setTitle("é”¦åŸç”µè§†"+(i+1)+"å°");
+			c.setQuality("1080Pé«˜æ¸…");
 			c.setUrl("http://test.com");
 			channels.add(c);
 		}
 	}
 	
 	/**
-	 * »ñÈ¡Ò»¸öÆµµÀ
+	 * è·å–ä¸€ä¸ªé¢‘é“
 	 * @param id
 	 * @return
 	 */
@@ -50,7 +50,7 @@ public class ChannelService {
 	}
 	
 	/**
-	 * »ñÈ¡ËùÓĞÆµµÀ
+	 * è·å–æ‰€æœ‰é¢‘é“
 	 * @return
 	 */
 	public List<Channel> getAllChannel() {
@@ -58,7 +58,7 @@ public class ChannelService {
 	}
 	
 	/**
-	 * É¾³ıÖ¸¶¨ÆµµÀ
+	 * åˆ é™¤æŒ‡å®šé¢‘é“
 	 * @param id
 	 * @return
 	 */
@@ -75,9 +75,9 @@ public class ChannelService {
 	}
 	
 	/**
-	 * ¸üĞÂÒ»¸öÆµµÀ
-	 * @param c ´ı¸üĞÂµÄÆµµÀ
-	 * @return ¸üĞÂºóµÄÆµµÀ
+	 * æ›´æ–°ä¸€ä¸ªé¢‘é“
+	 * @param c å¾…æ›´æ–°çš„é¢‘é“
+	 * @return æ›´æ–°åçš„é¢‘é“
 	 */
 	public Channel updateChannel(Channel c) {
 		Channel toChange = getChannel(c.getId());
@@ -90,7 +90,7 @@ public class ChannelService {
 	}
 	
 	/**
-	 * ĞÂ½¨ÆµµÀ
+	 * æ–°å»ºé¢‘é“
 	 * @param c
 	 * @return
 	 */
@@ -102,7 +102,7 @@ public class ChannelService {
 	}
 	
 	/**
-	 * ËÑË÷·½·¨
+	 * æœç´¢æ–¹æ³•
 	 * @param title
 	 * @param quality
 	 * @return
@@ -111,3 +111,4 @@ public class ChannelService {
 		return repo.findByTitleAndQuality(title, quality);
 	}
 }
+
