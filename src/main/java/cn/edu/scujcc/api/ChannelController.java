@@ -2,6 +2,8 @@ package cn.edu.scujcc.api;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,80 +15,80 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import ch.qos.logback.classic.Logger;
 import cn.edu.scujcc.model.Channel;
 import cn.edu.scujcc.service.ChannelService;
 
 /**
- * ÆµµÀ½Ó¿Ú£¬Ìá¹©¿Í»§·ÃÎÊÈë¿Ú¡£
+ * é¢‘é“æ¥å£ï¼Œæä¾›å®¢æˆ·è®¿é—®å…¥å£ã€‚
  * @author ZYF
  * 
  */
 @RestController
 @RequestMapping("/channel")
 public class ChannelController {
+	public static final Logger Logger = LoggerFactory.getLogger(ChannelController.class);
 	
 	@Autowired
 	private ChannelService service;
 	/**
-	 * »ñÈ¡ËùÓĞÆµµÀ
-	 * @return ËùÓĞÆµµÀµÄJSONÊı×é
+	 * è·å–æ‰€æœ‰é¢‘é“
+	 * @return æ‰€æœ‰é¢‘é“çš„JSONæ•°ç»„
 	 */
 	@GetMapping
 	 public List<Channel> getAllChannel() {
+		Logger.info("æ­£åœ¨è¯»å–æ‰€æœ‰é¢‘é“ä¿¡æ¯ï¼š");
 		List<Channel> results = service.getAllChannel();
 		 return results;
 	 }
 	 
 	/**
-	 * »ñÈ¡Ò»¸öÖ¸¶¨ÆµµÀµÄJSONÊı¾İ
-	 * @param id Ö¸¶¨ÆµµÀµÄ±àºÅ
-	 * @return id¶ÔÓ¦ÆµµÀµÄJSONÊı¾İ
+	 * è·å–ä¸€ä¸ªæŒ‡å®šé¢‘é“çš„JSONæ•°æ®
+	 * @param id æŒ‡å®šé¢‘é“çš„ç¼–å·
+	 * @return idå¯¹åº”é¢‘é“çš„JSONæ•°æ®
 	 */
 	@GetMapping("/{id}")
 	 public Channel getChannel(@PathVariable int id) {
-		
-		
-		System.out.println("»ñÈ¡ÆµµÀ£ºid="+id);
+		Logger.info("æ­£åœ¨è¯»å–"+id+"çš„é¢‘é“ä¿¡æ¯...");
 		Channel c = service.getChannel(id);
 		if(c != null) {
 			return c;
 		}else {
+			Logger.error("æ‰¾ä¸åˆ°æŒ‡å®šçš„é¢‘é“ã€‚");
 			return null;
 		}
 	 }
 	
 	/**
-	 * É¾³ıÒ»¸öÖ¸¶¨µÄÆµµÀ
-	 * @param id ´ıÉ¾³ıÆµµÀµÄ±àºÅ
-	 * @return ³É¹¦»òÊ§°ÜµÄÏûÏ¢
+	 * åˆ é™¤ä¸€ä¸ªæŒ‡å®šçš„é¢‘é“
+	 * @param id å¾…åˆ é™¤é¢‘é“çš„ç¼–å·
+	 * @return æˆåŠŸæˆ–å¤±è´¥çš„æ¶ˆæ¯
 	 */
 	@DeleteMapping("/{id}")
 	public ResponseEntity<String> deleteChannel(@PathVariable int id) {
-		System.out.println("¼´½«É¾³ıÆµµÀ£¬id="+id);
+		System.out.println("å³å°†åˆ é™¤é¢‘é“ï¼Œid="+id);
 		boolean result = this.service.deleteChannel(id);
 		if (result) {
-		    return ResponseEntity.ok().body("É¾³ı³É¹¦");
+		    return ResponseEntity.ok().body("åˆ é™¤æˆåŠŸ");
 		} else {
-			return ResponseEntity.ok().body("É¾³ıÊ§°Ü");
+			return ResponseEntity.ok().body("åˆ é™¤å¤±è´¥");
 		}
 	}
 	
 	/**
-	 * ĞÂ½¨Ò»¸öÆµµÀ
-	 * @param c ´ıĞÂ½¨ÆµµÀµÄÊı¾İ	
-	 * @return ±£´æºóµÄÆµµÀÊı¾İ
+	 * æ–°å»ºä¸€ä¸ªé¢‘é“
+	 * @param c å¾…æ–°å»ºé¢‘é“çš„æ•°æ®	
+	 * @return ä¿å­˜åçš„é¢‘é“æ•°æ®
 	 */
 	@PostMapping
 	public Channel createChannel(@RequestBody Channel c) {
-		System.out.println("¼´½«ĞÂ½¨ÆµµÀ£¬ÆµµÀÊı¾İ£º" + c);
+		System.out.println("å³å°†æ–°å»ºé¢‘é“ï¼Œé¢‘é“æ•°æ®ï¼š" + c);
 		Channel saved = service.createChannel(c);
 		return saved;
 	}
 	
 	@PutMapping
 	public Channel updateChannel(@RequestBody Channel c) {
-		System.out.println("¼´½«¸üĞÂÆµµÀ£¬ÆµµÀÊı¾İ£º" + c);
+		System.out.println("å³å°†æ›´æ–°é¢‘é“ï¼Œé¢‘é“æ•°æ®ï¼š" + c);
 		Channel updated = service.updateChannel(c);
 		return updated;
 	}
